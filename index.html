@@ -24,27 +24,19 @@
 	</head>
 	<body>
 		<div id="demo">
-			<!-- <pre>{{commits}}</pre> -->
-			<h1>Nombre de places parkings Nantes</h1>
-			<!-- <template v-for="branch in branches">
-				<input
-					type="radio"
-					:id="branch"
-					:value="branch"
-					name="branch"
-					v-model="currentBranch"
-				/>
-				<label :for="branch">{{ branch }}</label> -->
+		
+			<h1>-Nombre de places parkings Nantes-</h1>
+			
 			</template>
-			<!-- <p>vuejs/vue@{{ currentBranch }}</p> -->
+		
 		<div class="container">
 			<div class="place" v-for="record in records">
-				<h2>Adresse du parking : {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
-				<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
-				<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
-				<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
-				<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+				<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
 				<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
+				<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+				<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
+				<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
+				<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
 			</div>
 		</div>
 		</div>
@@ -82,16 +74,7 @@
 								console.log(error);
 							});
 					},
-					// fetchDataAsync: async function () {
-					// 	try {
-					//   	const response = await axios.get(apiURL + this.currentBranch, config)
-					// 	  console.log(response.data)
-					// 	  this.commits = response.data
-					//         // console.log(self.commits[0].html_url);
-					//   } catch(error) {
-					//     console.log(error);
-					//   }
-					// }, 
+					
 					formattedMessage: function (message) {
 						const newline = message.indexOf("\n");
 						return newline > 0 ? message.slice(0, newline) : message;
