@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>commits-example</title>
+		<title>Parking-infos</title>
 		<style>
 			#demo {
 				font-family: "Helvetica", Arial, sans-serif;
@@ -30,74 +30,56 @@
 	</head>
 	<body>
 		<div id="demo">
-		
 			<h1>-Nombre de places parkings Nantes-</h1>
-			
-			</template>
-		
-		<div class="container">
-			<div class="place" v-for="record in records">
-				<div class="small" v-if="record.fields.capacite_voiture < 200">
-					<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
-					<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
-					<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
-					<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
-					<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
-					<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
-				</div>
-				<div class="big" v-else>
-					<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
-					<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
-					<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
-					<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
-					<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
-					<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+			<div class="container">
+				<div class="place" v-for="record in records">
+					<div class="small" v-if="record.fields.capacite_voiture < 200">
+						<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
+						<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
+						<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+						<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
+						<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
+						<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+					</div>
+					<div class="big" v-else>
+						<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
+						<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
+						<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+						<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
+						<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
+						<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="https://unpkg.com/vue@3"></script>
 		<script>
 			const apiURL =
 				"https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_parkings-publics-nantes&q=&facet=libcategorie&facet=libtype&facet=acces_pmr&facet=service_velo&facet=stationnement_velo&facet=stationnement_velo_securise&facet=moyen_paiement";
-			const config = {
-			};
 
 			Vue.createApp({
 				data() {
 					return {
 						records : [],
-						isHuge : false
 					};
 				},
 
 				created: function () {
 					this.fetchDataPromise();
-					// this.fetchDataAsync()
 				},
 
 				methods: {
 					fetchDataPromise: function () {
 						const self = this;
 						axios
-							.get(apiURL, config)
+							.get(apiURL)
 							.then(function (response) {
-								console.log(response.data);
 								self.records = response.data.records;
-								console.log(self.records);
 							})
 							.catch(function (error) {
 								console.log(error);
 							});
-					},
-					
-					formattedMessage: function (message) {
-						const newline = message.indexOf("\n");
-						return newline > 0 ? message.slice(0, newline) : message;
-					},
-					formattedDate: function (date) {
-						return date.replace(/T|Z/g, " ");
 					},
 				},
 			}).mount("#demo");
