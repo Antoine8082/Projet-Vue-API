@@ -20,6 +20,12 @@
 			.date {
 				font-weight: bold;
 			}
+			.small > span {
+				color : red;
+			}
+			.big > span  {
+				color: blue;
+			}
 		</style>
 	</head>
 	<body>
@@ -31,12 +37,22 @@
 		
 		<div class="container">
 			<div class="place" v-for="record in records">
-				<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
-				<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
-				<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
-				<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
-				<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
-				<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+				<div class="small" v-if="record.fields.capacite_voiture < 200">
+					<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
+					<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
+					<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+					<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
+					<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
+					<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+				</div>
+				<div class="big" v-else>
+					<h2>Nom / emplacement : "{{record.fields.nom_complet}}", {{record.fields.adresse}}, {{record.fields.code_postal}}.</h2>
+					<span>Nombre de places PMR : {{record.fields.capacite_pmr}} </span> <br>
+					<span>Nombre de places vélos : {{record.fields.capacite_velo}} </span> <br>
+					<span>Nombre de places motos : {{record.fields.capacite_moto}} </span> <br>
+					<span>Nombre de places voitures électriques : {{record.fields.capacite_vehicule_electrique}} </span> <br>
+					<span>Nombre de places voitures : {{record.fields.capacite_voiture}} </span> <br>
+				</div>
 			</div>
 		</div>
 		</div>
@@ -51,7 +67,8 @@
 			Vue.createApp({
 				data() {
 					return {
-						records : []
+						records : [],
+						isHuge : false
 					};
 				},
 
